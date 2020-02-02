@@ -40,7 +40,10 @@ class MainControllerTests {
     fun addNewUserTest() {
         mockMvc.perform(
                 post("/add")
-                        .param("name", "unit_test")
-        ).andExpect(status().isOk).andExpect(content().string("Saved"))
+                        .param("name", "unit_test"))
+                .andExpect(status().isOk)
+                .andExpect(
+                        content().string("Saved")
+                )
     }
 }
