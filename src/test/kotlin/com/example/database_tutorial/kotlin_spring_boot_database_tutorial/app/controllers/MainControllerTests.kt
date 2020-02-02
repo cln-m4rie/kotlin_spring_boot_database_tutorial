@@ -62,4 +62,13 @@ class MainControllerTests {
                         content().string("Updated")
                 )
     }
+
+    @Test
+    fun deleteNoUserTest() {
+        mockMvc.perform(
+                post("/delete")
+                        .param("id", "-1"))
+                .andExpect(status().isOk)
+                .andExpect(content().string("User Not Found"))
+    }
 }
