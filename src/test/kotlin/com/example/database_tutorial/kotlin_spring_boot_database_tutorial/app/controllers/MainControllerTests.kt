@@ -71,4 +71,17 @@ class MainControllerTests {
                 .andExpect(status().isOk)
                 .andExpect(content().string("User Not Found"))
     }
+
+    @Test
+    @Sql(statements = ["insert into user (name) values ('delete_data');"])
+    fun deleteUserTest() {
+        val lastUser: User = target.userRepository.findAll().last()
+
+        mockMvc.perform(
+                post("/delete")
+                        .param("id", lastUser.id.toString()))
+                .andExpect(status().isOk)
+                .andExpect(content().string("Deleted"))
+
+    }
 }
